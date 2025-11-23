@@ -118,7 +118,7 @@ def prepare_sequence_data(train_data, test_data, target_column, forecast_horizon
 
 if has_pytorch:
     
-    class AttentionLSTM(nn.Module):
+    class attention_lstm(nn.Module):
         def __init__(self, input_dim, hidden_dim=64, num_layers=1):
             super().__init__()
             self.lstm_layer = nn.LSTM(input_dim, hidden_dim, num_layers=num_layers, batch_first=True)
@@ -133,7 +133,7 @@ if has_pytorch:
             output = self.output_layer(context_vector).squeeze(-1)
             return output
     
-    class TemporalConvNet(nn.Module):
+    class temporal_conv_net(nn.Module):
         def __init__(self, input_dim, hidden_dim=64):
             super().__init__()
             self.conv_layer_1 = nn.Conv1d(input_dim, hidden_dim, kernel_size=3, padding=2, dilation=2)
@@ -149,7 +149,7 @@ if has_pytorch:
             output = self.output_layer(x).squeeze(-1)
             return output
     
-    class TransformerTimeSeries(nn.Module):
+    class transformer_time_series(nn.Module):
         def __init__(self, input_dim, d_model=64, nhead=4, num_layers=2, dim_feedforward=128):
             super().__init__()
             self.input_projection = nn.Linear(input_dim, d_model)
@@ -170,7 +170,7 @@ if has_pytorch:
             output = self.output_layer(context).squeeze(-1)
             return output
     
-    class TemporalFusionTransformer(nn.Module):
+    class temporal_fusion_transformer(nn.Module):
         def __init__(self, input_dim, d_model=64, nhead=4, num_layers=2, hidden_dim=64):
             super().__init__()
             self.variable_projection = nn.Linear(input_dim, d_model)
@@ -197,7 +197,7 @@ if has_pytorch:
             output = self.output_layer(context).squeeze(-1)
             return output
     
-    class InformerModel(nn.Module):
+    class informer_model(nn.Module):
         def __init__(self, input_dim, d_model=64, nhead=4, num_layers=2, dim_feedforward=128):
             super().__init__()
             self.input_projection = nn.Linear(input_dim, d_model)
@@ -223,7 +223,7 @@ if has_pytorch:
             output = self.output_layer(context).squeeze(-1)
             return output
     
-    class AutoformerModel(nn.Module):
+    class autoformer_model(nn.Module):
         def __init__(self, input_dim, d_model=64, nhead=4, num_layers=2, dim_feedforward=128):
             super().__init__()
             self.input_projection = nn.Linear(input_dim, d_model)
@@ -391,12 +391,12 @@ def run_regression_models(train_dataframe, test_dataframe, feature_column_list, 
                 input_dimension = X_train_seq.shape[2]
                 
                 model_dict = {
-                    "AttnLSTM": AttentionLSTM(input_dim=input_dimension),
-                    "TCN": TemporalConvNet(input_dim=input_dimension),
-                    "Transformer": TransformerTimeSeries(input_dim=input_dimension),
-                    "TFT": TemporalFusionTransformer(input_dim=input_dimension),
-                    "Informer": InformerModel(input_dim=input_dimension),
-                    "Autoformer": AutoformerModel(input_dim=input_dimension),
+                    "AttnLSTM": attention_lstm(input_dim=input_dimension),
+                    "TCN": temporal_conv_net(input_dim=input_dimension),
+                    "Transformer": transformer_time_series(input_dim=input_dimension),
+                    "TFT": temporal_fusion_transformer(input_dim=input_dimension),
+                    "Informer": informer_model(input_dim=input_dimension),
+                    "Autoformer": autoformer_model(input_dim=input_dimension),
                 }
                 
                 for model_name, model_instance in model_dict.items():
