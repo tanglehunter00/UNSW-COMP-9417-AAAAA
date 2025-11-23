@@ -8,6 +8,9 @@ Tian Huang
 Jifei Wang
 Linyang Yu
 
+PAPER:
+https://docs.google.com/document/d/1D1FbySLu-G9L_u3cIeIRqR4XrbRhng8aMsEdvx-b5Mc/edit?usp=sharing
+
 PROJECT SPEC:
 
 COMP9417 Project: Forecasting Air Pollution with Machine Learning 
