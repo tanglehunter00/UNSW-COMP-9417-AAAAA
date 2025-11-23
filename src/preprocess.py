@@ -5,17 +5,16 @@ import os
 def load_and_clean(path):
     df = pd.read_csv(path, sep=";", decimal=",")
     
-    # Combine date and time: input format is DD/MM/YYYY and HH.MM.SS
     df["Timestamp"] = pd.to_datetime(
         df["Date"] + " " + df["Time"],
         format="%d/%m/%Y %H.%M.%S",
         errors="coerce"
     )
     
-    # Drop rows without timestamp
+    # drop row without timestamp
     df = df.dropna(subset=["Timestamp"])
     
-    # Replace missing numeric with NaN
+    # replace missing number with NaN
     df = df.replace({-200: np.nan})
 
     return df
@@ -62,4 +61,3 @@ def build_feature_list(df):
         ):
             feature_cols.append(col)
     return feature_cols
-

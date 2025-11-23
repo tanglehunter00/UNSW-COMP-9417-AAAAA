@@ -16,9 +16,6 @@ def rmse(a, b):
 
 
 def remove_outliers_iqr(df, col):
-    """
-    使用 IQR 四分位法去除异常点
-    """
     q1 = df[col].quantile(0.25)
     q3 = df[col].quantile(0.75)
     iqr = q3 - q1
@@ -107,7 +104,6 @@ def run_anomaly_detection(train_df, feature_cols, outdir):
 
             print(f"{target} +{h}h: base RMSE={base_rmse:.4f}, robust RMSE={robust_rmse:.4f}")
 
-    # 保存 CSV
     df = pd.DataFrame(metrics)
     df.to_csv(f"{outdir}/anomaly_metrics.csv", index=False)
     print(f"[INFO] 已保存 anomaly_metrics.csv -> {outdir}/anomaly_metrics.csv")
